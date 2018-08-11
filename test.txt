@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Patient Information</title>
+    </head>
+    <body>
+        <p id = "demo"></p>
+        <script type = "text/javascript">
+            var obj1 = {
+                  "resourceType": "Patient",
+                  "id": "xcda",
+                  "text": {
+                    "status": "generated",
+                    "<div>": "\n      \n      <p>Henry Levin the 7th</p>\n    \n    </div>"
+                  },
+                  "identifier": [
+                    {
+                      "use": "usual",
+                      "type": {
+                        "coding": [
+                          {
+                            "system": "htt://hl7.org/fhir/v2/0203",
+                            "code": "MR"
+                          }
+                        ]
+                      },
+                      "system": "urn:oid:2.16.840.1.113883.19.5",
+                      "value": 12345
+                    }
+                  ],
+                  "active": true,
+                  "name": [
+                    {
+                      "family": [
+                        "Levin"
+                      ],
+                      "given": [
+                        "Henry"
+                      ]
+                    }
+                  ],
+                  "gender": "male",
+                  "birthDate": "2002-09-24",
+                  "managingOrganization": {
+                    "reference": "Organization/2.16.840.1.113883.19.5",
+                    "display": "University Health Network"
+                  },
+                  "conditions": [
+                    "Diabetes",
+                    "High blood pressure",
+                    "Asthma"
+                  ]
+                };
+            
+                var headingE1 = document.getElementById("demo");
+                // number of conditions in the list
+                var count = obj1.conditions.length;
+
+                document.write("Name of the patient: " + obj1.name[0].given[0] +" " + obj1.name[0].family[0] + "<br>");
+                document.write("Organization Name: " + obj1.managingOrganization.display + "<br>")
+                document.write("Gender: " + obj1.gender + "<br>");
+                document.write("Number of conditions they have: " + count + "<br>");
+                document.write("List of all conditions: <br>");
+
+                function makeList() {
+                    var listContainer = document.createElement('div');
+                    document.getElementsByTagName('body')[0].appendChild(listContainer);
+
+                    // Make the list
+                    var listElement = document.createElement('ul');
+                    listContainer.appendChild(listElement);
+
+                    for (var i = 0; i < count; i++) {
+                        // create an item for each one
+                        var listItem = document.createElement('li');
+
+                        // Add the item text
+                        listItem.innerHTML = obj1.conditions[i];
+
+                        // Add listItem to the listElement
+                        listElement.appendChild(listItem);
+                    }
+                }
+            makeList();
+            
+        </script>
+    </body>
+</html>
